@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<OutputType>WinExe</OutputType>
+		<TargetFramework>net7.0-windows</TargetFramework>
+		<UseWindowsForms>true</UseWindowsForms>
+		<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+	</PropertyGroup>
+
+	<ItemGroup>
+	  <None Include="..\.editorconfig" Link=".editorconfig" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <PackageReference Include="LiteDB" Version="5.0.16" />
+	  <PackageReference Include="Prism.Core" Version="8.1.97" />
+	  <PackageReference Include="PW.Common" Version="7.0.0" />
+	  <PackageReference Include="PW.LaunchPad.AppRegistration" Version="1.0.1" />
+	  <PackageReference Include="PW.WinForms" Version="1.0.1" />
+	  <PackageReference Include="Unity" Version="5.11.10" />
+	</ItemGroup>
+
+</Project>
