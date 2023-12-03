@@ -27,11 +27,11 @@ namespace DuplicateVidDetector
     public void Init(IUnityContainer container)
     {
       Resolver = container;
-      PrismEvents = container.Resolve<Prism.Events.IEventAggregator>();
+      PrismEvents = container.Resolve<PW.Events.IEvents>();
       StoreFile = Resolver.Resolve<DataStore>();
     }
 
-    private Prism.Events.IEventAggregator PrismEvents { get; set; }
+    private PW.Events.IEvents PrismEvents { get; set; }
 
     private Unity.IUnityContainer Resolver { get; set; }
 
@@ -55,12 +55,8 @@ namespace DuplicateVidDetector
       PrismEvents = null!;
       Resolver = null!;
       StoreFile = null!;
-
       Icon = Properties.Resources.Duplicate1;
-
-      DownloadWatcher.Path = Program.DownloadsDirectory;
-      LibraryWatcher.Path = Program.LibraryDirectory;
-
+      LibraryWatcher.Path = Program.PornLibraryDirectory;
     }
 
     /// <summary>
@@ -94,8 +90,8 @@ namespace DuplicateVidDetector
       Videos.Clear();
       GroupsPanel.Controls.Clear();
 
-      // Obtain a array of all videos in directory and sub-directories
-      var videos = await Task.Run(() => Program.LibraryDirectory.EnumerateVideoFiles().ToArray()).ConfigureAwait(true);
+      // Obtain a array of all videos from both 'library' directories and their sub-directories
+      var videos = await Task.Run(() => Program.EnumerateAllVideos.ToArray()).ConfigureAwait(true);
 
       // Add new stuff.
       Videos.AddRange(videos);
@@ -242,6 +238,10 @@ namespace DuplicateVidDetector
       try
       {
         var item = Queue.Dequeue();
+
+        // If 'item' was transitory and no longer exists, then ignore it.
+        if (!item.Video.FilePath.Exists) return;
+
         var matches = item.MatchBy == MatchBy.Name ? Videos.Find(item.Video.FilePath.Name) : Videos.FindBySize(item.Video.Size);
 
         if (matches.Count != 0)
@@ -280,6 +280,11 @@ namespace DuplicateVidDetector
         MsgBox.ShowError(ex);
       }
 
+
+    }
+
+    private void DownloadWatcher_Changed(object sender, FileSystemEventArgs e)
+    {
 
     }
   }

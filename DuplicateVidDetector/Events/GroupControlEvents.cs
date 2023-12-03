@@ -1,16 +1,11 @@
-﻿#nullable enable
-
-using Prism.Events;
+﻿using PW.Events;
 using PW.IO.FileSystemObjects;
 using System.Collections.Generic;
-using System.Windows.Forms;
 
-namespace DuplicateVidDetector.Events.GroupControlEvents
-{
-  internal class IgnoreFileGroup : PubSubEvent<IEnumerable<FilePath>> { }
+namespace DuplicateVidDetector.Events.GroupControlEvents;
 
-  internal  class RemoveGroupEvent : PubSubEvent<GroupControl> { }
+internal class IgnoreFileGroup : PubSubEvent<IEnumerable<FilePath>> { }
 
-  internal class FileDeletedEvent : PubSubEvent<FilePath> { }
+internal class RemoveGroupEvent : PubSubEvent<GroupControl> { }
 
-}
+internal class FileDeletedEvent : PubSubEvent<FilePath> { }

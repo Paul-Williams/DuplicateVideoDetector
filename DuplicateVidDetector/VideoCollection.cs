@@ -29,7 +29,16 @@ namespace DuplicateVidDetector
     /// </summary>
     /// <param name="bytes"></param>
     /// <returns></returns>
-    public ICollection<VideoFile> FindBySize(long bytes) => this.Where(x => x.Size == bytes).ToArray();
+    public ICollection<VideoFile> FindBySize(long bytes)
+    {
+
+      // HACK - Does not keep track of file-system changes.
+      // So remove all missing files from list.
+      // This should be done by a watcher
+      foreach (var file in  this.Where(x => !x.FilePath.Exists).ToArray()) Remove(file);
+          
+      return this.Where(x => x.Size == bytes).ToArray();
+    }
 
 
     #region Grouping Methods

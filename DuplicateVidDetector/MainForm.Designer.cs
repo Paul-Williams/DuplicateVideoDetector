@@ -31,7 +31,6 @@ namespace DuplicateVidDetector
     {
       components = new System.ComponentModel.Container();
       LibraryWatcher = new System.IO.FileSystemWatcher();
-      DownloadWatcher = new System.IO.FileSystemWatcher();
       CheckExistsTextBox = new PW.WinForms.Controls.CueBannerTextBox();
       FindVideoWithSameNameButton = new System.Windows.Forms.Button();
       SearchPanel = new System.Windows.Forms.Panel();
@@ -40,7 +39,6 @@ namespace DuplicateVidDetector
       GroupsPanel = new System.Windows.Forms.FlowLayoutPanel();
       QueueProcessorTimer = new System.Windows.Forms.Timer(components);
       ((System.ComponentModel.ISupportInitialize)LibraryWatcher).BeginInit();
-      ((System.ComponentModel.ISupportInitialize)DownloadWatcher).BeginInit();
       SearchPanel.SuspendLayout();
       SuspendLayout();
       // 
@@ -52,13 +50,6 @@ namespace DuplicateVidDetector
       LibraryWatcher.Path = "P:\\Porn";
       LibraryWatcher.SynchronizingObject = this;
       LibraryWatcher.Created += LibraryWatcher_Created;
-      // 
-      // DownloadWatcher
-      // 
-      DownloadWatcher.EnableRaisingEvents = true;
-      DownloadWatcher.NotifyFilter = System.IO.NotifyFilters.FileName;
-      DownloadWatcher.SynchronizingObject = this;
-      DownloadWatcher.Created += DownloadWatcher_Created;
       // 
       // CheckExistsTextBox
       // 
@@ -153,14 +144,12 @@ namespace DuplicateVidDetector
       Load += MainForm_Load;
       KeyDown += MainForm_KeyDown;
       ((System.ComponentModel.ISupportInitialize)LibraryWatcher).EndInit();
-      ((System.ComponentModel.ISupportInitialize)DownloadWatcher).EndInit();
       SearchPanel.ResumeLayout(false);
       SearchPanel.PerformLayout();
       ResumeLayout(false);
     }
 
     #endregion
-    private System.IO.FileSystemWatcher DownloadWatcher;
     private System.Windows.Forms.Button FindVideoWithSameNameButton;
     private PW.WinForms.Controls.CueBannerTextBox CheckExistsTextBox;
     private System.Windows.Forms.Panel SearchPanel;
