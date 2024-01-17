@@ -40,7 +40,7 @@ namespace DuplicateVidDetector
 
     const int GroupControlMargin = 3;
 
-    private VideoCollection Videos { get; } = new VideoCollection();
+    private VideoCollection Videos { get; } = [];
 
     private Queue<QueueItem> Queue { get; } = new Queue<QueueItem>();
 
@@ -131,9 +131,8 @@ namespace DuplicateVidDetector
       }
     }
 
-#pragma warning disable IDE0051 // Remove unused private members
+
     private void CreateGroupControls(IEnumerable<IGrouping<FileName, VideoFile>> videoGroups)
-#pragma warning restore IDE0051 // Remove unused private members
     {
       static string CreateTitle(int count, long fileSize) =>
         $"File Count: {count} - File Size: {fileSize.ToStringByteSize()} ({fileSize} Bytes)";
@@ -152,13 +151,14 @@ namespace DuplicateVidDetector
     /// <summary>
     /// Creates a single <see cref="GroupControl"/>.
     /// </summary>
-    private void CreateGroupControl(string title, IEnumerable<FilePath> videos)
+    private void CreateGroupControl(string title, IEnumerable<FilePath> videos, bool ignoreButtonVisible = true)
     {
       var ctl = Resolver.Resolve<GroupControl>(); // Required to inject event aggregator.
 
       ctl.Title = title;
       ctl.BackColor = SystemColors.Control;
       ctl.BorderStyle = BorderStyle.FixedSingle;
+      ctl.IgnoreButtonVisible = ignoreButtonVisible;
       ctl.AddRange(videos);
       GroupsPanel.Controls.Add(ctl);
 
@@ -191,14 +191,16 @@ namespace DuplicateVidDetector
     {
       try
       {
-        if (CheckExistsTextBox.Text.Length == 0) return;
-        var find = (FileNameWithoutExtension)CheckExistsTextBox.Text;
-        var matches = Videos.Find((FileNameWithoutExtension)CheckExistsTextBox.Text);
+        var query = CheckExistsTextBox.Text;
+        if (query.Length == 0) return;
+        var matches = query.Contains('*')
+          ? Videos.Find(query)
+          : Videos.Find((FileNameWithoutExtension)query);
 
         if (matches.Count != 0)
         {
           GroupsPanel.Controls.Clear();
-          CreateGroupControl(find.Value, matches.Select(x => x.FilePath));
+          CreateGroupControl(query, matches.Select(x => x.FilePath), false);
         }
 
       }

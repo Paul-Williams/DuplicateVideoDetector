@@ -27,14 +27,17 @@ public partial class GroupControl : UserControl
     IEvents = null!;
   }
 
-  private List<FilePath> ItemList { get; } = new List<FilePath>();
+  private List<FilePath> ItemList { get; } = [];
 
   public string Title { get => TitleLabel.Text; set => TitleLabel.Text = value; }
+
+  public bool IgnoreButtonVisible { get => IgnoreButton.Visible; set => IgnoreButton.Visible = value; } 
+
 
   public void AddRange(IEnumerable<FilePath> items) => items.ForEach(Add);
 
   public void Add(FilePath item) {
-    if (item is null) throw new ArgumentNullException(nameof(item));
+    ArgumentNullException.ThrowIfNull(item);
 
     var label = new LinkLabel {
       Text = item,
@@ -52,7 +55,7 @@ public partial class GroupControl : UserControl
   }
 
   private void LinkLabel_LinkClicked(object? sender, LinkLabelLinkClickedEventArgs e) {
-    if (sender is null) throw new ArgumentNullException(nameof(sender));
+    ArgumentNullException.ThrowIfNull(sender);
 
     var file = (FilePath)((LinkLabel)sender).Text;
 

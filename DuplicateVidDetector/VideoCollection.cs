@@ -2,8 +2,10 @@
 
 using DuplicateVidDetector.Models;
 using PW.IO.FileSystemObjects;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using Windows.Data.Text;
 
 namespace DuplicateVidDetector
 {
@@ -18,6 +20,63 @@ namespace DuplicateVidDetector
     /// Attempts to return a <see cref="VideoFile"/> with the specified file name, ignoring the path and extension.
     /// </summary>
     public ICollection<VideoFile> Find(FileNameWithoutExtension find) => this.Where(x => x.FilePath.NameWithoutExtension == find).ToArray();
+
+    /// <summary>
+    /// Finds a file name using wildcard '*' at start, end, or both.
+    /// </summary>
+    public ICollection<VideoFile> Find(string query)
+    {
+      const StringComparison compare = StringComparison.OrdinalIgnoreCase;
+      static string name(VideoFile vf) => vf.FilePath.NameWithoutExtension.ToString();
+
+      return GetQueryType(query) switch
+      {
+        QueryType.Contains => this.Where(x => name(x).Contains(query.Replace("*", ""), compare)).ToArray(),
+        QueryType.StartsWith => this.Where(x => name(x).StartsWith(query.Replace("*", ""), compare)).ToArray(),
+        QueryType.EndsWith => this.Where(x => name(x).EndsWith(query.Replace("*", ""), compare)).ToArray(),
+        QueryType.ExactMatch => (ICollection<VideoFile>)this.Where(x => name(x).Equals(query, compare)).ToArray(),
+        _ => throw new NotImplementedException()
+      };
+
+
+      //return
+
+      //  // Wildcard both ends = contains query
+      //  query.StartsWith('*') && query.EndsWith('*')
+      //  ? this.Where(x => name(x).Contains(query.Replace("*", ""), StringComparison.OrdinalIgnoreCase)).ToArray()
+
+      //  // Wildcard at start = ends-with query
+      //  : query.StartsWith('*')
+      //  ? this.Where(x => name(x).EndsWith(query.Replace("*", ""), StringComparison.OrdinalIgnoreCase)).ToArray()
+
+      //  // Wildcard at end = starts-with query
+      //  : query.EndsWith('*')
+      //  ? this.Where(x => name(x).StartsWith(query.Replace("*", ""), StringComparison.OrdinalIgnoreCase)).ToArray()
+
+      //  : (ICollection<VideoFile>)this.Where(x => name(x) == query).ToArray();
+
+    }
+
+    /// <summary>
+    /// Supported query types.
+    /// </summary>
+    private enum QueryType { Contains, StartsWith, EndsWith, ExactMatch };
+
+
+    /// <summary>
+    /// Determines the query type, based on the position of wildcards.
+    /// </summary>
+    private static QueryType GetQueryType(string query)
+    {
+      return
+        query.StartsWith('*') && query.EndsWith('*') ? QueryType.Contains
+        : query.StartsWith('*') ? QueryType.EndsWith
+        : query.EndsWith('*') ? QueryType.StartsWith
+        : QueryType.ExactMatch;
+    }
+
+
+
 
     /// <summary>
     /// Attempts to return a <see cref="VideoFile"/> with the specified file name, ignoring the path.
@@ -35,8 +94,8 @@ namespace DuplicateVidDetector
       // HACK - Does not keep track of file-system changes.
       // So remove all missing files from list.
       // This should be done by a watcher
-      foreach (var file in  this.Where(x => !x.FilePath.Exists).ToArray()) Remove(file);
-          
+      foreach (var file in this.Where(x => !x.FilePath.Exists).ToArray()) Remove(file);
+
       return this.Where(x => x.Size == bytes).ToArray();
     }
 
