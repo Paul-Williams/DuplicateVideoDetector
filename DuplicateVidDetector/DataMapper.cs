@@ -2,6 +2,7 @@
 using PW.IO.FileSystemObjects;
 
 namespace DuplicateVidDetector;
+
 internal class DataMapper : BsonMapper
 {
   public DataMapper()

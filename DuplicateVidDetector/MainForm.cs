@@ -177,7 +177,7 @@ namespace DuplicateVidDetector
         {
           // Matching by name, here, seems like a hack-workaround for the fact that the file 
           // probably hasn't finished downloading, so preventing us matching on size.
-          Queue.Enqueue(new QueueItem(new VideoFile((FilePath)e.FullPath), MatchBy.Name));
+          Queue.Enqueue(new QueueItem(new VideoFile((FilePath)e.FullPath), MatchByOption.Name));
           QueueProcessorTimer.Enabled = true;
         }
       }
@@ -244,11 +244,11 @@ namespace DuplicateVidDetector
         // If 'item' was transitory and no longer exists, then ignore it.
         if (!item.Video.FilePath.Exists) return;
 
-        var matches = item.MatchBy == MatchBy.Name ? Videos.Find(item.Video.FilePath.Name) : Videos.FindBySize(item.Video.Size);
+        var matches = item.MatchBy == MatchByOption.Name ? Videos.Find(item.Video.FilePath.Name) : Videos.FindBySize(item.Video.Size);
 
         if (matches.Count != 0)
         {
-          var title = "Duplicate: " + (item.MatchBy == MatchBy.Name ? "Name" : "Size");
+          var title = "Duplicate: " + (item.MatchBy == MatchByOption.Name ? "Name" : "Size");
           var files = matches.Select(x => x.FilePath).Prepend(item.Video.FilePath);
           CreateGroupControl(title, files);
           this.Flash();
@@ -263,7 +263,7 @@ namespace DuplicateVidDetector
     {
       if (IsVideo(Path.GetExtension(e.FullPath)))
       {
-        Queue.Enqueue(new QueueItem(new VideoFile((FilePath)e.FullPath), MatchBy.Size));
+        Queue.Enqueue(new QueueItem(new VideoFile((FilePath)e.FullPath), MatchByOption.Size));
         QueueProcessorTimer.Enabled = true;
       }
 
