@@ -5,11 +5,22 @@ using System.Linq;
 
 namespace DuplicateVidDetector.Models;
 
-internal class IgnoredGroup(IEnumerable<FilePath> files)
+internal class IgnoredGroup
 {
+
+  public IgnoredGroup() { } // LiteDB requires an empty constructor.
+  
+  public IgnoredGroup(IEnumerable<FilePath> files)
+  {
+    Files = files.ToArray();
+  }
+
+
   public int Id { get; set; }
 
-  public FilePath[]? Files { get; set; } = files.ToArray();
+  public FilePath[]? Files { get; set; }
+
+
 
   /// <summary>
   /// Returns true if <paramref name="set"/> contains the same <see cref="FilePath"/>s as this instance. 
