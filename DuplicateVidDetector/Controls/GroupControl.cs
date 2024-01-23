@@ -15,7 +15,7 @@ public partial class GroupControl : UserControl
 {
   #region Prism/Unity Support
 
-  [Unity.InjectionMethod]
+  [InjectionMethod]
   public void Init(IUnityContainer container) => IEvents = container.Resolve<PW.Events.IEvents>();
 
   private PW.Events.IEvents IEvents { get; set; }

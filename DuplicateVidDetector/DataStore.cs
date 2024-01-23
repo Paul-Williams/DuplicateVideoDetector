@@ -19,7 +19,7 @@ internal class DataStore(FilePath dbFilePath, BsonMapper mapper)
   /// <summary>
   /// Path to the LiteDatabase file.
   /// </summary>
-  private FilePath DbFilePath { get; } = dbFilePath ?? throw new System.ArgumentNullException(nameof(dbFilePath));
+  private FilePath DbFilePath { get; } = dbFilePath ?? throw new ArgumentNullException(nameof(dbFilePath));
 
   // LiteDatabase will auto-create if missing. But the directory path must exist.
   private LiteRepository Repo => DbFilePath.DirectoryPath.Exists
