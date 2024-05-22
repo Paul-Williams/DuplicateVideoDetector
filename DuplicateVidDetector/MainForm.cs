@@ -88,11 +88,15 @@ public partial class MainForm : Form
     Videos.Clear();
     GroupsPanel.Controls.Clear();
 
-    // Obtain a array of all videos from both 'library' directories and their sub-directories
-    var videos = await Task.Run(() => Program.EnumerateAllVideos.ToArray()).ConfigureAwait(true);
+    //// Obtain a array of all videos from both 'library' directories and their sub-directories
+    //var videos = await Task.Run(() => Program.EnumerateAllVideos.ToArray()).ConfigureAwait(true);
 
-    // Add new stuff.
-    Videos.AddRange(videos);
+    //// Add new stuff.
+    //Videos.AddRange(videos);
+
+    // As working code above, but without creating array.
+    Videos.AddRange(await Task.Run(() => Program.EnumerateAllVideos).ConfigureAwait(true));
+
     CreateGroupControls(Videos.OfSameSize);
 
     ScanningLabel.Visible = false;
