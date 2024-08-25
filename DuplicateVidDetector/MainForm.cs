@@ -83,21 +83,17 @@ public partial class MainForm : Form
   private async Task RefreshListOfVideosAndDisplayDuplicates()
   {
     ScanningLabel.Visible = true;
+    Application.DoEvents();
+    Application.DoEvents();
 
     // Dump any previous stuff.
     Videos.Clear();
     GroupsPanel.Controls.Clear();
 
-    //// Obtain a array of all videos from both 'library' directories and their sub-directories
-    //var videos = await Task.Run(() => Program.EnumerateAllVideos.ToArray()).ConfigureAwait(true);
-
-    //// Add new stuff.
-    //Videos.AddRange(videos);
-
-    // As working code above, but without creating array.
+    // Obtain a array of all videos from both 'library' directories and their sub-directories
     Videos.AddRange(await Task.Run(() => Program.EnumerateAllVideos).ConfigureAwait(true));
-
     CreateGroupControls(Videos.OfSameSize);
+    CreateGroupControls(Videos.WithSameName);
 
     ScanningLabel.Visible = false;
 
@@ -133,22 +129,43 @@ public partial class MainForm : Form
     }
   }
 
-
-  private void CreateGroupControls(IEnumerable<IGrouping<FileName, VideoFile>> videoGroups)
+  /// <summary>
+  /// Creates a <see cref="GroupControl"/> for each group in the enumeration.
+  /// </summary>
+  private void CreateGroupControls(IEnumerable<IGrouping<FileNameWithoutExtension, VideoFile>> videoGroups)
   {
-    static string CreateTitle(int count, long fileSize) =>
-      $"File Count: {count} - File Size: {fileSize.ToStringByteSize()} ({fileSize} Bytes)";
+    static string CreateTitle(int count, FileNameWithoutExtension file) =>
+      $"File Count: {count} - File name: {file.Value}";
 
     foreach (var group in videoGroups.OrderByDescending(x => x.Key))
     {
-      var filePaths = group.Select(x => x.FilePath).ToArray();
-      if (!StoreFile.All<IgnoredGroup>().Any(x => x.Matches(filePaths)))
+      var filePaths = group.Select(videoFile => videoFile.FilePath).ToArray();
+      if (!StoreFile.All<IgnoredGroup>().Any(ignoredGroup => ignoredGroup.Matches(filePaths)))
       {
-        // HACK -1 in title
-        CreateGroupControl(CreateTitle(filePaths.Length, -1), filePaths);
+        CreateGroupControl(CreateTitle(filePaths.Length, group.Key), filePaths);
       }
     }
   }
+
+
+
+
+
+  //private void CreateGroupControls(IEnumerable<IGrouping<FileName, VideoFile>> videoGroups)
+  //{
+  //  static string CreateTitle(int count, long fileSize) =>
+  //    $"File Count: {count} - File Size: {fileSize.ToStringByteSize()} ({fileSize} Bytes)";
+
+  //  foreach (var group in videoGroups.OrderByDescending(x => x.Key))
+  //  {
+  //    var filePaths = group.Select(x => x.FilePath).ToArray();
+  //    if (!StoreFile.All<IgnoredGroup>().Any(x => x.Matches(filePaths)))
+  //    {
+  //      // HACK -1 in title
+  //      CreateGroupControl(CreateTitle(filePaths.Length, -1), filePaths);
+  //    }
+  //  }
+  //}
 
   /// <summary>
   /// Creates a single <see cref="GroupControl"/>.

@@ -70,5 +70,13 @@ internal partial class VideoCollection : List<VideoFile>
   /// <summary>
   /// Returns groupings where there are duplicates, based on size.
   /// </summary>
-  public IEnumerable<IGrouping<long, VideoFile>> OfSameSize => this.GroupBy(x => x.Size).WhereHasMultipleElements();
+  public IEnumerable<IGrouping<long, VideoFile>> OfSameSize 
+    => this.GroupBy(x => x.Size).WhereHasMultipleElements();
+
+  /// <summary>
+  /// Returns groupings where there are duplicates, based on file name, ignoring the file extension.
+  /// </summary>
+  public IEnumerable<IGrouping<FileNameWithoutExtension, VideoFile>> WithSameName 
+    => this.GroupBy(x => x.FilePath.NameWithoutExtension).WhereHasMultipleElements();
+
 }
