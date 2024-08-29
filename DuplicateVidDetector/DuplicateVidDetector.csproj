@@ -8,6 +8,9 @@
 		<Nullable>enable</Nullable>
 		<ApplicationIcon>Resources\Duplicate1.ico</ApplicationIcon>
 		<SupportedOSPlatformVersion>10.0.26100.0</SupportedOSPlatformVersion>
+		<ApplicationHighDpiMode>SystemAware</ApplicationHighDpiMode>
+		<ForceDesignerDpiUnaware>true</ForceDesignerDpiUnaware>
+		<LangVersion>preview</LangVersion>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

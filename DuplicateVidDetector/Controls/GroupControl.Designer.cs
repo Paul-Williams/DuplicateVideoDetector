@@ -28,69 +28,67 @@
     /// </summary>
     private void InitializeComponent()
     {
-      this.Panel = new System.Windows.Forms.TableLayoutPanel();
-      this.TitleLabel = new System.Windows.Forms.Label();
-      this.IgnoreButton = new System.Windows.Forms.Button();
-      this.SuspendLayout();
+      Panel = new System.Windows.Forms.TableLayoutPanel();
+      TitleLabel = new System.Windows.Forms.Label();
+      IgnoreButton = new System.Windows.Forms.Button();
+      SuspendLayout();
       // 
       // Panel
       // 
-      this.Panel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-      this.Panel.AutoSize = true;
-      this.Panel.ColumnCount = 1;
-      this.Panel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-      this.Panel.Location = new System.Drawing.Point(0, 38);
-      this.Panel.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-      this.Panel.Name = "Panel";
-      this.Panel.Padding = new System.Windows.Forms.Padding(0, 0, 0, 7);
-      this.Panel.RowCount = 2;
-      this.Panel.RowStyles.Add(new System.Windows.Forms.RowStyle());
-      this.Panel.RowStyles.Add(new System.Windows.Forms.RowStyle());
-      this.Panel.Size = new System.Drawing.Size(460, 46);
-      this.Panel.TabIndex = 0;
+      Panel.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+      Panel.AutoSize = true;
+      Panel.ColumnCount = 1;
+      Panel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+      Panel.Location = new System.Drawing.Point(0, 38);
+      Panel.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+      Panel.Name = "Panel";
+      Panel.Padding = new System.Windows.Forms.Padding(0, 0, 0, 7);
+      Panel.RowCount = 2;
+      Panel.RowStyles.Add(new System.Windows.Forms.RowStyle());
+      Panel.RowStyles.Add(new System.Windows.Forms.RowStyle());
+      Panel.Size = new System.Drawing.Size(460, 46);
+      Panel.TabIndex = 0;
       // 
       // TitleLabel
       // 
-      this.TitleLabel.AutoSize = true;
-      this.TitleLabel.Location = new System.Drawing.Point(5, 8);
-      this.TitleLabel.Name = "TitleLabel";
-      this.TitleLabel.Size = new System.Drawing.Size(32, 17);
-      this.TitleLabel.TabIndex = 1;
-      this.TitleLabel.Text = "Title";
+      TitleLabel.AutoSize = true;
+      TitleLabel.Location = new System.Drawing.Point(5, 8);
+      TitleLabel.Name = "TitleLabel";
+      TitleLabel.Size = new System.Drawing.Size(32, 17);
+      TitleLabel.TabIndex = 1;
+      TitleLabel.Text = "Title";
       // 
       // IgnoreButton
       // 
-      this.IgnoreButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-      this.IgnoreButton.FlatStyle = System.Windows.Forms.FlatStyle.System;
-      this.IgnoreButton.Location = new System.Drawing.Point(371, 4);
-      this.IgnoreButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-      this.IgnoreButton.Name = "IgnoreButton";
-      this.IgnoreButton.Size = new System.Drawing.Size(87, 30);
-      this.IgnoreButton.TabIndex = 2;
-      this.IgnoreButton.Text = "Ignore";
-      this.IgnoreButton.UseVisualStyleBackColor = true;
-      this.IgnoreButton.Click += new System.EventHandler(this.IgnoreButton_Click);
+      IgnoreButton.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
+      IgnoreButton.FlatStyle = System.Windows.Forms.FlatStyle.System;
+      IgnoreButton.Location = new System.Drawing.Point(371, 4);
+      IgnoreButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+      IgnoreButton.Name = "IgnoreButton";
+      IgnoreButton.Size = new System.Drawing.Size(87, 30);
+      IgnoreButton.TabIndex = 2;
+      IgnoreButton.Text = "Ignore";
+      IgnoreButton.UseVisualStyleBackColor = true;
+      IgnoreButton.Click += IgnoreButton_Click;
       // 
       // GroupControl
       // 
-      this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
-      this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-      this.Controls.Add(this.IgnoreButton);
-      this.Controls.Add(this.TitleLabel);
-      this.Controls.Add(this.Panel);
-      this.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-      this.Name = "GroupControl";
-      this.Size = new System.Drawing.Size(462, 97);
-      this.ResumeLayout(false);
-      this.PerformLayout();
-
+      AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
+      AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+      Controls.Add(IgnoreButton);
+      Controls.Add(TitleLabel);
+      Controls.Add(Panel);
+      Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
+      Margin = new System.Windows.Forms.Padding(0, 0, 0, 1);
+      Name = "GroupControl";
+      Size = new System.Drawing.Size(462, 97);
+      ResumeLayout(false);
+      PerformLayout();
     }
 
-        #endregion
+    #endregion
 
-        private System.Windows.Forms.TableLayoutPanel Panel;
+    private System.Windows.Forms.TableLayoutPanel Panel;
         private System.Windows.Forms.Label TitleLabel;
         private System.Windows.Forms.Button IgnoreButton;
     }

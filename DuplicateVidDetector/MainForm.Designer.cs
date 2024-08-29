@@ -36,7 +36,7 @@ namespace DuplicateVidDetector
       SearchPanel = new System.Windows.Forms.Panel();
       RefreshButton = new System.Windows.Forms.Button();
       ScanningLabel = new PW.WinForms.Controls.TransparentLabel();
-      GroupsPanel = new System.Windows.Forms.FlowLayoutPanel();
+      GroupsPanel = new System.Windows.Forms.TableLayoutPanel();
       QueueProcessorTimer = new System.Windows.Forms.Timer(components);
       ((System.ComponentModel.ISupportInitialize)LibraryWatcher).BeginInit();
       SearchPanel.SuspendLayout();
@@ -56,17 +56,17 @@ namespace DuplicateVidDetector
       CheckExistsTextBox.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
       CheckExistsTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
       CheckExistsTextBox.CueBannerText = "Type file name (without extension) to check if it already exists";
-      CheckExistsTextBox.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+      CheckExistsTextBox.Font = new System.Drawing.Font("Segoe UI", 9.75F);
       CheckExistsTextBox.Location = new System.Drawing.Point(3, 7);
       CheckExistsTextBox.Name = "CheckExistsTextBox";
-      CheckExistsTextBox.Size = new System.Drawing.Size(639, 25);
+      CheckExistsTextBox.Size = new System.Drawing.Size(621, 25);
       CheckExistsTextBox.TabIndex = 0;
       // 
       // FindVideoWithSameNameButton
       // 
       FindVideoWithSameNameButton.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
       FindVideoWithSameNameButton.FlatStyle = System.Windows.Forms.FlatStyle.System;
-      FindVideoWithSameNameButton.Location = new System.Drawing.Point(648, 6);
+      FindVideoWithSameNameButton.Location = new System.Drawing.Point(630, 6);
       FindVideoWithSameNameButton.Name = "FindVideoWithSameNameButton";
       FindVideoWithSameNameButton.Size = new System.Drawing.Size(43, 27);
       FindVideoWithSameNameButton.TabIndex = 1;
@@ -83,14 +83,14 @@ namespace DuplicateVidDetector
       SearchPanel.Dock = System.Windows.Forms.DockStyle.Top;
       SearchPanel.Location = new System.Drawing.Point(0, 0);
       SearchPanel.Name = "SearchPanel";
-      SearchPanel.Size = new System.Drawing.Size(738, 42);
+      SearchPanel.Size = new System.Drawing.Size(720, 42);
       SearchPanel.TabIndex = 2;
       // 
       // RefreshButton
       // 
       RefreshButton.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
-      RefreshButton.Font = new System.Drawing.Font("Wingdings 3", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-      RefreshButton.Location = new System.Drawing.Point(698, 7);
+      RefreshButton.Font = new System.Drawing.Font("Wingdings 3", 12F);
+      RefreshButton.Location = new System.Drawing.Point(680, 7);
       RefreshButton.Name = "RefreshButton";
       RefreshButton.Size = new System.Drawing.Size(28, 26);
       RefreshButton.TabIndex = 2;
@@ -101,10 +101,10 @@ namespace DuplicateVidDetector
       // ScanningLabel
       // 
       ScanningLabel.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-      ScanningLabel.Font = new System.Drawing.Font("Segoe UI", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+      ScanningLabel.Font = new System.Drawing.Font("Segoe UI", 20.25F);
       ScanningLabel.Location = new System.Drawing.Point(12, 147);
       ScanningLabel.Name = "ScanningLabel";
-      ScanningLabel.Size = new System.Drawing.Size(714, 37);
+      ScanningLabel.Size = new System.Drawing.Size(696, 37);
       ScanningLabel.TabIndex = 4;
       ScanningLabel.TabStop = false;
       ScanningLabel.Text = "Enumerating Video Files...";
@@ -114,13 +114,13 @@ namespace DuplicateVidDetector
       // 
       GroupsPanel.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
       GroupsPanel.AutoScroll = true;
-      GroupsPanel.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+      GroupsPanel.AutoScrollMargin = new System.Drawing.Size(10, 0);
+      GroupsPanel.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+      GroupsPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
       GroupsPanel.Location = new System.Drawing.Point(3, 48);
       GroupsPanel.Name = "GroupsPanel";
-      GroupsPanel.Size = new System.Drawing.Size(735, 278);
+      GroupsPanel.Size = new System.Drawing.Size(717, 300);
       GroupsPanel.TabIndex = 3;
-      GroupsPanel.WrapContents = false;
-      GroupsPanel.Resize += GroupsPanel_Resize;
       // 
       // QueueProcessorTimer
       // 
@@ -132,11 +132,11 @@ namespace DuplicateVidDetector
       AcceptButton = FindVideoWithSameNameButton;
       AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
       AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-      ClientSize = new System.Drawing.Size(738, 330);
+      ClientSize = new System.Drawing.Size(720, 352);
       Controls.Add(ScanningLabel);
       Controls.Add(GroupsPanel);
       Controls.Add(SearchPanel);
-      Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+      Font = new System.Drawing.Font("Segoe UI", 9.75F);
       KeyPreview = true;
       Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
       Name = "MainForm";
@@ -156,7 +156,7 @@ namespace DuplicateVidDetector
     private System.IO.FileSystemWatcher LibraryWatcher;
     private PW.WinForms.Controls.TransparentLabel ScanningLabel;
     private System.Windows.Forms.Button RefreshButton;
-    private System.Windows.Forms.FlowLayoutPanel GroupsPanel;
+    private System.Windows.Forms.TableLayoutPanel GroupsPanel;
     private System.Windows.Forms.Timer QueueProcessorTimer;
   }
 }

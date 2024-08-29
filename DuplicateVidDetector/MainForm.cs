@@ -36,7 +36,7 @@ public partial class MainForm : Form
   #endregion
 
 
-  const int GroupControlMargin = 3;
+  //const int GroupControlMargin = 3;
 
   private VideoCollection Videos { get; } = [];
 
@@ -92,8 +92,14 @@ public partial class MainForm : Form
 
     // Obtain a array of all videos from both 'library' directories and their sub-directories
     Videos.AddRange(await Task.Run(() => Program.EnumerateAllVideos).ConfigureAwait(true));
+
+    GroupsPanel.Visible = false;
+    GroupsPanel.SuspendLayout();
     CreateGroupControls(Videos.OfSameSize);
     CreateGroupControls(Videos.WithSameName);
+    GroupsPanel.ResumeLayout();
+    GroupsPanel.Visible=true; 
+
 
     ScanningLabel.Visible = false;
 
@@ -176,13 +182,14 @@ public partial class MainForm : Form
 
     ctl.Title = title;
     ctl.BackColor = SystemColors.Control;
-    ctl.BorderStyle = BorderStyle.FixedSingle;
+    //ctl.BorderStyle = BorderStyle.FixedSingle;
     ctl.IgnoreButtonVisible = ignoreButtonVisible;
     ctl.AddRange(videos);
     GroupsPanel.Controls.Add(ctl);
+    ctl.Dock = DockStyle.Fill;
 
     // Width must be set after the control is added to the panel.
-    ctl.Width = GroupsPanel.Width - (2 * GroupControlMargin);
+    //ctl.Width = GroupsPanel.Width - (2 * GroupControlMargin);
   }
 
   /// <summary>
@@ -234,24 +241,28 @@ public partial class MainForm : Form
     catch (Exception ex) { MsgBox.ShowError(ex); }
   }
 
-  private void GroupsPanel_Resize(object sender, EventArgs e)
-  {
-    var groups = GroupsPanel.Controls.OfType<GroupControl>().ToArray();
+  //private void GroupsPanel_Resize(object sender, EventArgs e)
+  //{
+  //  //var groups = GroupsPanel.Controls.OfType<GroupControl>().ToArray();
 
-    if (groups.Length == 0) return;
+  //  //if (groups.Length == 0) return;
 
-    var width = GroupsPanel.Width - (2 * GroupControlMargin);
+  //  //var width = GroupsPanel.Width - (2 * GroupControlMargin);
 
-    groups.ForEach(x => x.Width = width);
+  //  //groups.ForEach(x => x.Width = width);
 
 
-  }
+  //}
 
   /// <summary>
   /// Process queued items.
   /// </summary>
   private void QueueProcessorTimer_Tick(object sender, EventArgs e)
   {
+    // This logic appears bugged.
+    // * Only processes single item each run-through, rather than looping to process all.
+    // * Timer disabled to prevent re-entry, however is also re-enabled in LibraryWatcher_Created
+
     if (QueueProcessorTimer.Enabled == false) return;   // Prevent re-entry
     QueueProcessorTimer.Enabled = false;                // Prevent re-entry
     if (Queue.Count == 0) return;                       // Sanity check
@@ -304,8 +315,4 @@ public partial class MainForm : Form
 
   }
 
-  private void DownloadWatcher_Changed(object sender, FileSystemEventArgs e)
-  {
-
-  }
 }
