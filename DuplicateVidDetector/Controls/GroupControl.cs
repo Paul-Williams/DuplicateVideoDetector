@@ -43,7 +43,7 @@ public partial class GroupControl : UserControl
     ArgumentNullException.ThrowIfNull(item);
 
     var label = new LinkLabel {
-      Text = item,
+      Text = item.ToString(),
       Left = 0,
       Anchor = AnchorStyles.Top | AnchorStyles.Right | AnchorStyles.Left,
       AutoSize = true,
@@ -66,7 +66,7 @@ public partial class GroupControl : UserControl
     // Left button opens link
     if (e.Button == MouseButtons.Left) {
       try {
-        Process.Start(new ProcessStartInfo(file) { UseShellExecute = true });
+        Process.Start(new ProcessStartInfo(file.ToString()) { UseShellExecute = true });
       }
       catch (Exception) { } // TODO: Should do something with this.
     }
