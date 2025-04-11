@@ -51,7 +51,7 @@ public partial class MainForm : Form
     Resolver = null!;
     StoreFile = null!;
     Icon = Properties.Resources.Duplicate1;
-    LibraryWatcher.Path = Program.PornLibraryDirectory;
+    LibraryWatcher.Path = Program.PornLibraryDirectory.ToString();
   }
 
   /// <summary>

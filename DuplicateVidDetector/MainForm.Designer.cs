@@ -152,6 +152,7 @@ namespace DuplicateVidDetector
 
     #endregion
     private System.Windows.Forms.Button FindDuplicatesButton;
+    [System.Obsolete]
     private PW.WinForms.Controls.CueBannerTextBox CheckExistsTextBox;
     private System.Windows.Forms.Panel SearchPanel;
     private System.IO.FileSystemWatcher LibraryWatcher;
