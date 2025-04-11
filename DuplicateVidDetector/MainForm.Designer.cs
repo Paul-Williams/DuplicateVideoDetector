@@ -32,7 +32,7 @@ namespace DuplicateVidDetector
       components = new System.ComponentModel.Container();
       LibraryWatcher = new System.IO.FileSystemWatcher();
       CheckExistsTextBox = new PW.WinForms.Controls.CueBannerTextBox();
-      FindVideoWithSameNameButton = new System.Windows.Forms.Button();
+      FindDuplicatesButton = new System.Windows.Forms.Button();
       SearchPanel = new System.Windows.Forms.Panel();
       RefreshButton = new System.Windows.Forms.Button();
       ScanningLabel = new PW.WinForms.Controls.TransparentLabel();
@@ -62,24 +62,24 @@ namespace DuplicateVidDetector
       CheckExistsTextBox.Size = new System.Drawing.Size(621, 25);
       CheckExistsTextBox.TabIndex = 0;
       // 
-      // FindVideoWithSameNameButton
+      // FindDuplicatesButton
       // 
-      FindVideoWithSameNameButton.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
-      FindVideoWithSameNameButton.FlatStyle = System.Windows.Forms.FlatStyle.System;
-      FindVideoWithSameNameButton.Location = new System.Drawing.Point(630, 3);
-      FindVideoWithSameNameButton.Name = "FindVideoWithSameNameButton";
-      FindVideoWithSameNameButton.Size = new System.Drawing.Size(43, 33);
-      FindVideoWithSameNameButton.TabIndex = 1;
-      FindVideoWithSameNameButton.Text = "Find";
-      FindVideoWithSameNameButton.UseVisualStyleBackColor = true;
-      FindVideoWithSameNameButton.Click += FindVideoWithSameNameButton_Click;
+      FindDuplicatesButton.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
+      FindDuplicatesButton.FlatStyle = System.Windows.Forms.FlatStyle.System;
+      FindDuplicatesButton.Location = new System.Drawing.Point(630, 3);
+      FindDuplicatesButton.Name = "FindDuplicatesButton";
+      FindDuplicatesButton.Size = new System.Drawing.Size(43, 33);
+      FindDuplicatesButton.TabIndex = 1;
+      FindDuplicatesButton.Text = "Find";
+      FindDuplicatesButton.UseVisualStyleBackColor = true;
+      FindDuplicatesButton.Click += FindVideoWithSameNameButton_Click;
       // 
       // SearchPanel
       // 
       SearchPanel.BackColor = System.Drawing.SystemColors.Control;
       SearchPanel.Controls.Add(RefreshButton);
       SearchPanel.Controls.Add(CheckExistsTextBox);
-      SearchPanel.Controls.Add(FindVideoWithSameNameButton);
+      SearchPanel.Controls.Add(FindDuplicatesButton);
       SearchPanel.Dock = System.Windows.Forms.DockStyle.Top;
       SearchPanel.Location = new System.Drawing.Point(0, 0);
       SearchPanel.Name = "SearchPanel";
@@ -130,7 +130,7 @@ namespace DuplicateVidDetector
       // 
       // MainForm
       // 
-      AcceptButton = FindVideoWithSameNameButton;
+      AcceptButton = FindDuplicatesButton;
       AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
       AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       ClientSize = new System.Drawing.Size(720, 352);
@@ -151,7 +151,7 @@ namespace DuplicateVidDetector
     }
 
     #endregion
-    private System.Windows.Forms.Button FindVideoWithSameNameButton;
+    private System.Windows.Forms.Button FindDuplicatesButton;
     private PW.WinForms.Controls.CueBannerTextBox CheckExistsTextBox;
     private System.Windows.Forms.Panel SearchPanel;
     private System.IO.FileSystemWatcher LibraryWatcher;
