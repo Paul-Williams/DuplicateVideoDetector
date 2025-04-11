@@ -23,19 +23,23 @@ internal class DataStore(FilePath dbFilePath, BsonMapper mapper)
 
   // LiteDatabase will auto-create if missing. But the directory path must exist.
   private LiteRepository Repo => DbFilePath.DirectoryPath.Exists
-    ? new LiteRepository(DbFilePath, Mapper)
+    ? new LiteRepository(DbFilePath.ToString(), Mapper)
     : throw new DirectoryNotFoundException("Store directory not found:" + DbFilePath.DirectoryPath);
 
-  /// <summary>
+  /// <summary
   /// Query all entities of type <typeparamref name="T"/>.
   /// </summary>
-  public List<T> All<T>() => Repo.DisposeAfter(repo => repo.Query<T>().ToList());
+  public List<T> All<T>() => Repo.Using(repo => repo.Query<T>().ToList()) ?? [];
 
   /// <summary>
   /// Insert or Update a document based on _id key. Returns true if insert entity or false if update entity
   /// </summary>
-  public bool Upsert<T>(T entity) => Repo.DisposeAfter(repo => repo.Upsert(entity));
+  public bool Upsert<T>(T entity) => Repo.Using(repo => repo.Upsert(entity));
 
-  public void Drop<T>() => Repo.DisposeAfter(repo => repo.Database.DropCollection(typeof(T).Name));
+  /// <summary>
+  /// Removes a collection from the database based on the type provided. The collection name corresponds to the type <see cref="T"/>
+  /// </summary>
+  /// <typeparam name="T">Specifies the type whose collection will be dropped from the database.</typeparam>
+  public void Drop<T>() => Repo.Using(repo => repo.Database.DropCollection(typeof(T).Name));
 
 }
