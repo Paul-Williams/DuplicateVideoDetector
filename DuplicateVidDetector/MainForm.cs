@@ -55,6 +55,8 @@ public partial class MainForm : Form
     StoreFile = null!;
     Icon = Properties.Resources.Duplicate1;
     LibraryWatcher.Path = Program.PornLibraryDirectory;
+
+    //RefreshButton.UseCompatibleTextRendering = true;
   }
 
   /// <summary>

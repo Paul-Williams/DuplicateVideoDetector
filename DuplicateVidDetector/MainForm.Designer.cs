@@ -66,9 +66,9 @@ namespace DuplicateVidDetector
       // 
       FindVideoWithSameNameButton.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
       FindVideoWithSameNameButton.FlatStyle = System.Windows.Forms.FlatStyle.System;
-      FindVideoWithSameNameButton.Location = new System.Drawing.Point(630, 6);
+      FindVideoWithSameNameButton.Location = new System.Drawing.Point(630, 3);
       FindVideoWithSameNameButton.Name = "FindVideoWithSameNameButton";
-      FindVideoWithSameNameButton.Size = new System.Drawing.Size(43, 27);
+      FindVideoWithSameNameButton.Size = new System.Drawing.Size(43, 33);
       FindVideoWithSameNameButton.TabIndex = 1;
       FindVideoWithSameNameButton.Text = "Find";
       FindVideoWithSameNameButton.UseVisualStyleBackColor = true;
@@ -89,12 +89,13 @@ namespace DuplicateVidDetector
       // RefreshButton
       // 
       RefreshButton.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
-      RefreshButton.Font = new System.Drawing.Font("Wingdings 3", 12F);
-      RefreshButton.Location = new System.Drawing.Point(680, 7);
+      RefreshButton.Font = new System.Drawing.Font("Segoe UI Symbol", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 0);
+      RefreshButton.ForeColor = System.Drawing.Color.Green;
+      RefreshButton.Location = new System.Drawing.Point(679, 3);
       RefreshButton.Name = "RefreshButton";
-      RefreshButton.Size = new System.Drawing.Size(28, 26);
+      RefreshButton.Size = new System.Drawing.Size(37, 33);
       RefreshButton.TabIndex = 2;
-      RefreshButton.Text = "P";
+      RefreshButton.Text = "⭮";
       RefreshButton.UseVisualStyleBackColor = true;
       RefreshButton.Click += RefreshButton_Click;
       // 
