@@ -155,26 +155,6 @@ public partial class MainForm : Form
     }
   }
 
-
-
-
-
-  //private void CreateGroupControls(IEnumerable<IGrouping<FileName, VideoFile>> videoGroups)
-  //{
-  //  static string CreateTitle(int count, long fileSize) =>
-  //    $"File Count: {count} - File Size: {fileSize.ToStringByteSize()} ({fileSize} Bytes)";
-
-  //  foreach (var group in videoGroups.OrderByDescending(x => x.Key))
-  //  {
-  //    var filePaths = group.Select(x => x.FilePath).ToArray();
-  //    if (!StoreFile.All<IgnoredGroup>().Any(x => x.Matches(filePaths)))
-  //    {
-  //      // HACK -1 in title
-  //      CreateGroupControl(CreateTitle(filePaths.Length, -1), filePaths);
-  //    }
-  //  }
-  //}
-
   /// <summary>
   /// Creates a single <see cref="GroupControl"/>.
   /// </summary>
@@ -242,19 +222,6 @@ public partial class MainForm : Form
     try { await RefreshListOfVideosAndDisplayDuplicates(); }
     catch (Exception ex) { MsgBox.ShowError(ex); }
   }
-
-  //private void GroupsPanel_Resize(object sender, EventArgs e)
-  //{
-  //  //var groups = GroupsPanel.Controls.OfType<GroupControl>().ToArray();
-
-  //  //if (groups.Length == 0) return;
-
-  //  //var width = GroupsPanel.Width - (2 * GroupControlMargin);
-
-  //  //groups.ForEach(x => x.Width = width);
-
-
-  //}
 
   /// <summary>
   /// Process queued items.
