@@ -7,6 +7,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Windows.Forms;
 using Unity;
+using System.ComponentModel;
 
 namespace DuplicateVidDetector;
 
@@ -29,8 +30,10 @@ public partial class GroupControl : UserControl
 
   private List<FilePath> ItemList { get; } = [];
 
-  public string Title { get => TitleLabel.Text; set => TitleLabel.Text = value; }
+  [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+  public string? Title { get => TitleLabel.Text; set => TitleLabel.Text = value; }
 
+  [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
   public bool IgnoreButtonVisible { get => IgnoreButton.Visible; set => IgnoreButton.Visible = value; } 
 
 
