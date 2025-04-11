@@ -11,8 +11,8 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using static DuplicateVidDetector.FileExtensionExtensions;
 using Unity;
+using static DuplicateVidDetector.FileExtensionExtensions;
 
 namespace DuplicateVidDetector;
 
@@ -35,9 +35,6 @@ public partial class MainForm : Form
 
   #endregion
 
-
-  //const int GroupControlMargin = 3;
-
   private VideoCollection Videos { get; } = [];
 
   private Queue<QueueItem> Queue { get; } = new Queue<QueueItem>();
@@ -55,8 +52,6 @@ public partial class MainForm : Form
     StoreFile = null!;
     Icon = Properties.Resources.Duplicate1;
     LibraryWatcher.Path = Program.PornLibraryDirectory;
-
-    //RefreshButton.UseCompatibleTextRendering = true;
   }
 
   /// <summary>
@@ -66,7 +61,7 @@ public partial class MainForm : Form
   {
     try
     {
-      // Ensure form is displayed and all? messages processed before awaiting task.
+      // Ensure form is displayed and all? messages are processed, before awaiting task.
       Show();
       Application.DoEvents();
       Application.DoEvents();
@@ -75,10 +70,7 @@ public partial class MainForm : Form
       SubscribeToEvents();
       QueueProcessorTimer.Enabled = true;
     }
-    catch (Exception ex)
-    {
-      MsgBox.ShowError(ex);
-    }
+    catch (Exception ex) { MsgBox.ShowError(ex); }
   }
 
 
@@ -100,11 +92,8 @@ public partial class MainForm : Form
     CreateGroupControls(Videos.OfSameSize);
     CreateGroupControls(Videos.WithSameName);
     GroupsPanel.ResumeLayout();
-    GroupsPanel.Visible=true; 
-
-
+    GroupsPanel.Visible = true;
     ScanningLabel.Visible = false;
-
   }
 
   /// <summary>
@@ -164,14 +153,10 @@ public partial class MainForm : Form
 
     ctl.Title = title;
     ctl.BackColor = SystemColors.Control;
-    //ctl.BorderStyle = BorderStyle.FixedSingle;
     ctl.IgnoreButtonVisible = ignoreButtonVisible;
     ctl.AddRange(videos);
     GroupsPanel.Controls.Add(ctl);
     ctl.Dock = DockStyle.Fill;
-
-    // Width must be set after the control is added to the panel.
-    //ctl.Width = GroupsPanel.Width - (2 * GroupControlMargin);
   }
 
   /// <summary>
