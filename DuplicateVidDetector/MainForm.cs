@@ -90,7 +90,7 @@ public partial class MainForm : Form
     GroupsPanel.Visible = false;
     GroupsPanel.SuspendLayout();
     CreateGroupControls(Videos.OfSameSize);
-    CreateGroupControls(Videos.WithSameName);
+    //CreateGroupControls(Videos.WithSameName);
     GroupsPanel.ResumeLayout();
     GroupsPanel.Visible = true;
     ScanningLabel.Visible = false;
